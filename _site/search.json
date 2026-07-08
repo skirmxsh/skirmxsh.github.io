@@ -1,0 +1,12 @@
+[
+  
+  {
+    "title":   "Initial Post",
+    "url":     "/post/initial-post/",
+    "date":    "Jul 8, 2026",
+    "tags":    "first-post",
+    "excerpt": "Initial post to test posting.",
+    "content": "This is an initial post to make sure the site works well.print(\"Hello!\")"
+  }
+  
+]

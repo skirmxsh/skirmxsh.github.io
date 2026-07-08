@@ -1,0 +1,49 @@
+# --- Site settings ---
+title: Research Blog
+author: skirmish
+email: 
+
+# Social links (used by the footer icons). Put just your handle/username.
+github_username: skirmxsh
+twitter_username: skirmxsh
+description: >-
+  A blog used for uploading security research.
+
+# Base URL settings.
+# For a GitHub *project* site (username.github.io/my-repo) set:
+#   baseurl: "/my-repo"
+# For a *user/org* site (username.github.io) leave baseurl empty.
+baseurl: ""
+url: ""
+
+# --- Build settings ---
+markdown: kramdown
+highlighter: rouge
+permalink: /post/:title/
+
+# GitHub Pages runs Jekyll with these safe plugins.
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+# Default front matter
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+  - scope:
+      path: ""
+    values:
+      layout: default
+
+# Pagination-free; homepage lists all posts as tiles.
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - vendor
+  - .sass-cache
+  - .jekyll-cache

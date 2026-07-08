@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" width="640" height="360" role="img" aria-label="Post image">
+  <rect width="640" height="360" fill="#0c333a"/>
+  <g fill="none" stroke="#5bcfde" stroke-width="3">
+    <circle cx="278" cy="180" r="78" stroke-opacity="0.9"/>
+    <circle cx="362" cy="180" r="78" stroke-opacity="0.55"/>
+  </g>
+</svg>
