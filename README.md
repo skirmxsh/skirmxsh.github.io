@@ -11,7 +11,7 @@ A clean, blog-focused Jekyll site with:
 
 ## Quick start (local preview)
 
-You need Ruby + Bundler installed. Then:
+You need Ruby + Bundler installed. Then run:
 
 ```bash
 bundle install
