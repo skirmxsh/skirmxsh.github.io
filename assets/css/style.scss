@@ -341,6 +341,7 @@ img { max-width: 100%; height: auto; }
   background: var(--bg-elevated-2);
   color: var(--text-muted);
   border: 1px solid var(--border);
+  white-space: nowrap;
 }
 
 /* =========================================================
@@ -384,6 +385,7 @@ img { max-width: 100%; height: auto; }
 .post-header { margin-bottom: 24px; }
 .post-title { font-size: 2.3rem; margin: 0 0 8px; }
 .post-meta { color: var(--text-muted); margin: 0; font-size: 0.95rem; }
+.post-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; max-width: 100%; }
 .post-hero { width: 100%; border-radius: 14px; margin: 8px 0 28px; border: 1px solid var(--border); }
 
 .post-content { font-size: 1.06rem; }
@@ -518,7 +520,7 @@ img { max-width: 100%; height: auto; }
   border: 1px solid var(--border);
   border-radius: 10px;
   margin: 1.5em 0;
-  overflow: hidden;
+  overflow-x: auto;
 }
 .post-content .highlight pre,
 .post-content figure.highlight pre {
