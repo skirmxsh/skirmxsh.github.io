@@ -3,31 +3,29 @@ layout: default
 title: Home
 ---
 
-<section class="page-intro">
-  <h1>Latest posts</h1>
-  <p>Click any tile to read the full article.</p>
+<section class="home-hero">
+  <h1>Security research &amp; writeups</h1>
+  <p>{{ site.description | strip_newlines }}</p>
 </section>
 
-<div class="tiles">
+<ul class="post-list">
   {% for post in site.posts %}
-    <a class="tile" href="{{ post.url | relative_url }}">
-      <img class="tile-thumb"
-           src="{{ post.image | default: '/assets/images/placeholder.svg' | relative_url }}"
-           alt="{{ post.title | escape }}"
-           loading="lazy">
-      <div class="tile-body">
-        <span class="tile-date">{{ post.date | date: "%b %-d, %Y" }}</span>
-        <h2 class="tile-title">{{ post.title | escape }}</h2>
-        <p class="tile-desc">
-          {{ post.description | default: post.excerpt | strip_html | truncate: 140 }}
-        </p>
+    <li class="post-row">
+      <a class="post-row-link" href="{{ post.url | relative_url }}">
+        <div class="post-row-meta">
+          <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time>
+          {% assign words = post.content | number_of_words %}
+          <span class="dot">&middot;</span>
+          <span class="read-time">{{ words | divided_by: 200 | plus: 1 }} min read</span>
+        </div>
+        <h2 class="post-row-title">{{ post.title | escape }}</h2>
+        <p class="post-row-desc">{{ post.description | default: post.excerpt | strip_html | truncate: 180 }}</p>
         {% if post.tags and post.tags.size > 0 %}
-          <div class="tile-tags">
+          <div class="post-row-tags">
             {% for tag in post.tags %}<span class="tag">{{ tag }}</span>{% endfor %}
           </div>
         {% endif %}
-        <span class="tile-more">Read article &rarr;</span>
-      </div>
-    </a>
+      </a>
+    </li>
   {% endfor %}
-</div>
+</ul>

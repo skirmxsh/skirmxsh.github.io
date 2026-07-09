@@ -14,7 +14,7 @@ description: >-
 #   baseurl: "/my-repo"
 # For a *user/org* site (username.github.io) leave baseurl empty.
 baseurl: ""
-url: ""
+url: "https://skirmish.red"
 
 # --- Build settings ---
 markdown: kramdown

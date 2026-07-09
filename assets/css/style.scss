@@ -75,13 +75,15 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--text);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
                Helvetica, Arial, sans-serif, "Apple Color Emoji";
   font-size: 18px;
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
   transition: background-color .25s ease, color .25s ease;
 }
+
+:root { --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
 
 .wrap {
   max-width: 1080px;
@@ -117,12 +119,18 @@ img { max-width: 100%; height: auto; }
 }
 
 .site-title {
+  font-family: var(--mono);
   font-weight: 700;
-  font-size: 1.2rem;
+  font-size: 1.15rem;
+  letter-spacing: -0.01em;
   color: var(--heading);
   white-space: nowrap;
 }
-.site-title:hover { text-decoration: none; color: var(--accent); }
+.site-title:hover { text-decoration: none; }
+.site-title .brand-dot { color: var(--accent); }
+.site-title .brand-tld { color: var(--heading); }
+.site-title:hover .brand-mark,
+.site-title:hover .brand-tld { color: var(--accent); }
 
 .site-nav {
   display: flex;
@@ -194,7 +202,7 @@ img { max-width: 100%; height: auto; }
 .search-results .r-empty { padding: 12px 14px; color: var(--text-muted); font-size: 0.9rem; }
 
 /* Theme toggle */
-.theme-toggle {
+.icon-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -207,7 +215,11 @@ img { max-width: 100%; height: auto; }
   cursor: pointer;
   transition: background .2s, color .2s, border-color .2s;
 }
-.theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+.icon-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+/* Search-toggle icon only appears on small screens */
+.search-toggle { display: none; }
+
 .icon-sun { display: none; }
 .icon-moon { display: block; }
 :root[data-theme="light"] .icon-sun { display: block; }
@@ -222,6 +234,63 @@ img { max-width: 100%; height: auto; }
 .page-intro { margin: 8px 0 28px; }
 .page-intro h1 { font-size: 2rem; margin: 0 0 6px; }
 .page-intro p { color: var(--text-muted); margin: 0; }
+
+/* 404 */
+.notfound { text-align: center; padding: 60px 0; }
+.notfound-code {
+  font-family: var(--mono);
+  font-size: 4rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin: 0;
+  line-height: 1;
+}
+.notfound h1 { margin: 12px 0 8px; }
+.notfound-text { color: var(--text-muted); margin: 0 0 20px; }
+.notfound-links { display: flex; justify-content: center; gap: 12px; color: var(--text-muted); }
+.notfound-links .dot { opacity: 0.6; }
+
+/* =========================================================
+   Home hero + article list
+   ========================================================= */
+
+.home-hero {
+  max-width: 760px;
+  margin: 8px 0 36px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--border);
+}
+.home-hero h1 { font-size: 2.1rem; margin: 0 0 8px; letter-spacing: -0.02em; }
+.home-hero p { color: var(--text-muted); margin: 0; font-size: 1.05rem; }
+
+.post-list { list-style: none; margin: 0; padding: 0; max-width: 760px; }
+.post-row + .post-row { border-top: 1px solid var(--border); }
+.post-row-link {
+  display: block;
+  padding: 26px 0;
+  color: inherit;
+}
+.post-row-link:hover { text-decoration: none; }
+.post-row-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+.post-row-meta .dot { opacity: 0.6; }
+.post-row-title {
+  font-size: 1.5rem;
+  margin: 8px 0 6px;
+  color: var(--heading);
+  transition: color .15s ease;
+}
+.post-row-link:hover .post-row-title { color: var(--accent); }
+.post-row-desc { margin: 0; color: var(--text-muted); }
+.post-row-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
 
 /* =========================================================
    Blog tiles
@@ -333,7 +402,8 @@ img { max-width: 100%; height: auto; }
   background: var(--code-bg);
   padding: 2px 6px;
   border-radius: 6px;
-  font-size: 0.9em;
+  font-family: var(--mono);
+  font-size: 0.86em;
 }
 .post-content pre {
   background: var(--code-bg);
@@ -341,8 +411,32 @@ img { max-width: 100%; height: auto; }
   border-radius: 10px;
   overflow-x: auto;
   border: 1px solid var(--border);
+  font-family: var(--mono);
+  font-size: 0.9rem;
 }
-.post-content pre code { background: none; padding: 0; }
+.post-content pre code { background: none; padding: 0; font-size: inherit; }
+
+/* Copy-to-clipboard button on code blocks */
+.copy-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  padding: 4px 10px;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity .15s ease, color .15s ease, border-color .15s ease;
+}
+.post-content pre:hover .copy-btn,
+.post-content .highlight:hover .copy-btn,
+.copy-btn:focus { opacity: 1; }
+.copy-btn:hover { color: var(--accent); border-color: var(--accent); }
+.copy-btn.copied { color: var(--accent-strong); border-color: var(--accent-strong); }
 .post-content a { text-decoration: underline; text-underline-offset: 2px; }
 
 .back-link { margin-top: 40px; }
@@ -385,11 +479,31 @@ img { max-width: 100%; height: auto; }
 
 @media (max-width: 720px) {
   body { font-size: 17px; }
-  .header-inner { flex-wrap: wrap; height: auto; padding: 10px 0; gap: 10px; }
-  .header-tools { width: 100%; }
-  #search-input { flex: 1; width: auto; max-width: none; }
-  .search { flex: 1; }
+
+  /* Header stacks into three tidy rows on small screens:
+     row 1: brand (left) + theme toggle (right)
+     row 2: full-width search
+     row 3: centered nav */
+  .header-inner {
+    flex-wrap: wrap;
+    height: auto;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    gap: 12px;
+  }
+  /* row 1: brand (left) + search icon + theme toggle (right) */
+  .site-title    { order: 1; margin-right: auto; }
+  .search-toggle { order: 2; display: inline-flex; }
+  .theme-toggle  { order: 3; }
+  /* row 2: nav */
+  .site-nav      { order: 4; width: 100%; justify-content: center; gap: 4px; }
+  /* row 3: search field, hidden until the icon is tapped */
+  .header-tools  { order: 5; width: 100%; margin-left: 0; display: none; }
+  .site-header.search-open .header-tools { display: block; }
+  .search        { position: relative; width: 100%; }
+  #search-input  { width: 100%; max-width: none; }
   .search-results { width: 100%; }
+
   .tiles { grid-template-columns: 1fr; }
   .post-title { font-size: 1.8rem; }
 }
